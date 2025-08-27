@@ -29,25 +29,25 @@ unpack_archive() {
     exit 1
   fi
   echo "Archive unpacked successfully."
+  cd ageapp
 }
 
 install_to_system() {
   echo "Installing to system directories..."
-  
-  sudo cp "$UNPACK_DIR/bin/ageapp" "/usr/bin/ageapp"
+
+  sudo cp "bin/ageapp" "/usr/bin/ageapp"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the executable to /usr/bin. Administrator rights (sudo) may be required."
     exit 1
   fi
   echo "Executable successfully copied to /usr/bin."
 
-  sudo cp "$UNPACK_DIR/share/applications/ageapp.desktop" "/usr/share/applications/ageapp.desktop"
+  sudo cp "share/applications/ageapp.desktop" "/usr/share/applications/ageapp.desktop"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the desktop file."
   fi
-  
-  sudo mkdir -p "/usr/share/icons/hicolor/128x128/apps/"
-  sudo cp "$UNPACK_DIR/icons/hicolor/128x128/apps/AgeAPP_ds.png" "/usr/share/icons/hicolor/128x128/apps/ageapp_ds.png"
+
+  sudo cp "share/icons/hicolor/128x128/apps/AgeAPP_ds.png" "/usr/share/icons/hicolor/128x128/apps/ageapp_ds.png"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the icon."
   fi
@@ -55,7 +55,9 @@ install_to_system() {
 
 cleanup() {
   echo "Removing temporary files..."
-  rm -rf "$UNPACK_DIR" "$ARCHIVE_NAME"
+  cd ~
+  rm -rf "ageapp"
+  rm "$ARCHIVE_NAME"
   echo "Done!"
 }
 
@@ -65,4 +67,4 @@ unpack_archive
 install_to_system
 cleanup
 
-echo "AgeAPP installation succesfully completed!"
+echo "AgeAPP installation successfully completed!"
