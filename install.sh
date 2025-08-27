@@ -29,25 +29,25 @@ unpack_archive() {
     exit 1
   fi
   echo "Archive unpacked successfully."
-  cd ageapp
+  cd app/
 }
 
 install_to_system() {
   echo "Installing to system directories..."
 
-  sudo cp "bin/ageapp" "/usr/bin/ageapp"
+  sudo cp "AgeAPP/bin/ageapp" "/usr/bin/ageapp"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the executable to /usr/bin. Administrator rights (sudo) may be required."
     exit 1
   fi
   echo "Executable successfully copied to /usr/bin."
 
-  sudo cp "share/applications/ageapp.desktop" "/usr/share/applications/ageapp.desktop"
+  sudo cp "AgeAPP/share/applications/ageapp.desktop" "/usr/share/applications/ageapp.desktop"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the desktop file."
   fi
 
-  sudo cp "share/icons/hicolor/128x128/apps/AgeAPP_ds.png" "/usr/share/icons/hicolor/128x128/apps/ageapp_ds.png"
+  sudo cp "AgeAPP/share/icons/hicolor/128x128/apps/AgeAPP_ds.png" "/usr/share/icons/hicolor/128x128/apps/ageapp_ds.png"
   if [ $? -ne 0 ]; then
     echo "Error: Failed to copy the icon."
   fi
